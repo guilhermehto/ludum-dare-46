@@ -5,10 +5,10 @@ signal cold_damaged(damage)
 
 onready var timer : Timer = $Timer
 
-export var decay_rate : float
-export var max_body_temperature : float
-export var minimun_body_temperature : float
-export var temperature : float setget set_temperature
+export var decay_rate : float = 0.25
+export var max_body_temperature : float = 38
+export var minimun_body_temperature : float = 30
+export var temperature : float = 35 setget set_temperature
 export var cold_damage : int = 5
 export var cold_damage_interval : int = 2
 

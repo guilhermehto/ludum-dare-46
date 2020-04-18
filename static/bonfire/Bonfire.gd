@@ -39,12 +39,10 @@ func add_wood(wood) -> bool:
 	woods.add_child(wood)
 	return true
 
-
 func _on_Area_body_entered(body: Node) -> void:
 	if not body.warm_body:
 		return
 	warm_bodies.append(body.warm_body)
-
 
 func _on_Area_body_exited(body: Node) -> void:
 	if not body.warm_body:
