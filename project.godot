@@ -9,12 +9,18 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "KinematicBody",
+"class": "Player",
+"language": "GDScript",
+"path": "res://actors/player/Player.gd"
+}, {
 "base": "Node",
 "class": "Wood",
 "language": "GDScript",
 "path": "res://static/trees/woods/WoodInfo.gd"
 } ]
 _global_script_class_icons={
+"Player": "",
 "Wood": ""
 }
 

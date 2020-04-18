@@ -1,6 +1,9 @@
 extends KinematicBody
+class_name Player
 
 export var move_speed := 15.0
+
+onready var inventory = $Inventory
 
 func _physics_process(_delta: float) -> void:
 	var horizontal_movement := int(Input.is_action_pressed("move_right")) - int(Input.is_action_pressed("move_left"))
