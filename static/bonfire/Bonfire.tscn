@@ -37,6 +37,12 @@ one_shot = true
 
 [node name="CollisionShape" type="CollisionShape" parent="Area"]
 shape = SubResource( 3 )
+
+[node name="OmniLight" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+light_color = Color( 1, 0.862745, 0.133333, 1 )
+shadow_enabled = true
+omni_range = 8.76002
 [connection signal="timeout" from="CurrentWoodTimer" to="." method="_on_CurrentWoodTimer_timeout"]
 [connection signal="body_entered" from="Area" to="." method="_on_Area_body_entered"]
 [connection signal="body_exited" from="Area" to="." method="_on_Area_body_exited"]
