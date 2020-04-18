@@ -1,4 +1,5 @@
 extends Spatial
+class_name WoodTree
 
 onready var timer : Timer = $Timer
 onready var mesh_instace : MeshInstance = $MeshInstance
@@ -32,7 +33,6 @@ func _fall() -> void:
 		var random_direction = Vector3(randi() % 3, 0, randi() % 3).normalized()
 		drop.global_transform.origin = global_transform.origin + random_direction * Vector3(randi() % 5, 0, randi() % 5)
 	
-
 func _on_Timer_timeout() -> void:
 	growth_stage += 1
 	mesh_instace.mesh = stage_meshes[growth_stage - 1]
@@ -45,7 +45,6 @@ func _on_Timer_timeout() -> void:
 func hit(damage: float) -> void:
 	# todo: animations and shit
 	if growth_stage != 3:
-		# maybe destroy the tree?
 		return
 	current_hp -= damage
 	if current_hp <= 0:
