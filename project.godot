@@ -42,6 +42,10 @@ config/name="Ludum Dare 46"
 run/main_scene="res://Game.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+GlobalSignals="*res://utils/GlobalSignals.tscn"
+
 [display]
 
 window/size/width=426

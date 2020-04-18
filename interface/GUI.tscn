@@ -1,0 +1,75 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://interface/fonts/small-pixel.tres" type="DynamicFont" id=1]
+[ext_resource path="res://interface/GUI.gd" type="Script" id=2]
+[ext_resource path="res://interface/InventoryInterface.gd" type="Script" id=3]
+
+[node name="GUI" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = 10.0
+margin_right = -10.0
+margin_bottom = -10.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Notification" type="Label" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -50.5
+margin_top = -4.0
+margin_right = 50.5
+margin_bottom = 4.0
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 0
+text = "Bonfire already full"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Inventory" type="VBoxContainer" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -40.0
+margin_right = 40.0
+alignment = 2
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Wood" type="HBoxContainer" parent="Inventory"]
+margin_top = 20.0
+margin_right = 61.0
+margin_bottom = 28.0
+
+[node name="Label" type="Label" parent="Inventory/Wood"]
+margin_right = 39.0
+margin_bottom = 8.0
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 0
+text = "Wood: 33"
+
+[node name="Capacity" type="HBoxContainer" parent="Inventory"]
+margin_top = 32.0
+margin_right = 61.0
+margin_bottom = 40.0
+
+[node name="Label" type="Label" parent="Inventory/Capacity"]
+margin_right = 61.0
+margin_bottom = 8.0
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 0
+text = "Weight: 13/20"
