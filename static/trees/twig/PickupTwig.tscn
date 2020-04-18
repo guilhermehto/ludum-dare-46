@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://static/trees/twig/TwigInfo.tscn" type="PackedScene" id=1]
+[ext_resource path="res://static/trees/PickupWood.tscn" type="PackedScene" id=2]
+
+[sub_resource type="CylinderMesh" id=1]
+top_radius = 0.2
+bottom_radius = 0.2
+height = 0.5
+radial_segments = 6
+rings = 2
+
+[node name="Twig" instance=ExtResource( 2 )]
+
+[node name="MeshInstance" type="MeshInstance" parent="." index="1"]
+mesh = SubResource( 1 )
+material/0 = null
+
+[node name="Info" parent="." index="2" instance=ExtResource( 1 )]

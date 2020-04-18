@@ -8,9 +8,14 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Node",
+"class": "Wood",
+"language": "GDScript",
+"path": "res://static/trees/woods/WoodInfo.gd"
+} ]
 _global_script_class_icons={
-
+"Wood": ""
 }
 
 [application]
