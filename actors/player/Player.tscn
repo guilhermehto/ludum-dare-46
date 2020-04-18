@@ -1,6 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://actors/player/Player.gd" type="Script" id=1]
+[ext_resource path="res://actors/player/Camera.tscn" type="PackedScene" id=2]
+[ext_resource path="res://actors/player/Camera.gd" type="Script" id=3]
 
 [sub_resource type="CapsuleMesh" id=1]
 radial_segments = 6
@@ -31,3 +33,10 @@ shape = SubResource( 2 )
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 2.76926, -0.34126 )
 mesh = SubResource( 3 )
 material/0 = SubResource( 4 )
+
+[node name="Camera" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 30.4698, 46.2337 )
+current = true
+near = 0.01
+far = 1301.3
+script = ExtResource( 3 )
