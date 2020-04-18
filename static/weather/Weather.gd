@@ -18,7 +18,6 @@ func _process(delta: float) -> void:
 	environment.ambient_light_color = Color(current_color.r + rate,
 		current_color.g + rate,
 		current_color.b + rate)
-	
 
 func _on_Timer_timeout() -> void:
 	passed_days += 1
