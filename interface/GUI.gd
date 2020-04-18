@@ -3,7 +3,7 @@ extends Control
 onready var inventory = $Inventory
 
 func _ready() -> void:
-	GlobalSignals.connect("inventory_item_added", self, "_on_inventory_item_added")
+	GlobalSignals.connect("inventory_updated", self, "_on_inventory_updated")
 
-func _on_inventory_item_added(info):
+func _on_inventory_updated(info):
 	inventory.update_text(info)

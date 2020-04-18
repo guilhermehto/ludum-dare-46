@@ -15,9 +15,24 @@ func add_item(item) -> void:
 	
 	if item is Wood:
 		woods.add_child(item)
-		GlobalSignals.emit_inventory_item_added({
+		GlobalSignals.emit_inventory_updated({
 			"item": item, 
 			"carrying_weight": weight_limit - capacity, 
 			"weight_limit": weight_limit, 
 			"carrying": woods.get_child_count()
 		})
+
+func remove_wood() -> Wood:
+	var removed_wood = woods.get_children()[0]
+	woods.remove_child(removed_wood)
+	
+	capacity += removed_wood.weight
+	
+	GlobalSignals.emit_inventory_updated({
+			"item": removed_wood, 
+			"carrying_weight": weight_limit - capacity, 
+			"weight_limit": weight_limit, 
+			"carrying": woods.get_child_count()
+		})
+	
+	return removed_wood

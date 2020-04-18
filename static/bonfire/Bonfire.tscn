@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://static/bonfire/Bonfire.gd" type="Script" id=1]
 [ext_resource path="res://static/trees/twig/TwigInfo.tscn" type="PackedScene" id=2]
+[ext_resource path="res://static/bonfire/BonfireInteraction.tscn" type="PackedScene" id=3]
 
 [sub_resource type="CubeMesh" id=1]
 
@@ -43,6 +44,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
 light_color = Color( 1, 0.862745, 0.133333, 1 )
 shadow_enabled = true
 omni_range = 8.76002
+
+[node name="BonfireInteraction" parent="." instance=ExtResource( 3 )]
 [connection signal="timeout" from="CurrentWoodTimer" to="." method="_on_CurrentWoodTimer_timeout"]
 [connection signal="body_entered" from="Area" to="." method="_on_Area_body_entered"]
 [connection signal="body_exited" from="Area" to="." method="_on_Area_body_exited"]

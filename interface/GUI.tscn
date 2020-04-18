@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://interface/fonts/small-pixel.tres" type="DynamicFont" id=1]
 [ext_resource path="res://interface/GUI.gd" type="Script" id=2]
 [ext_resource path="res://interface/InventoryInterface.gd" type="Script" id=3]
+[ext_resource path="res://interface/Notification.gd" type="Script" id=4]
 
 [node name="GUI" type="Control"]
 anchor_right = 1.0
@@ -31,9 +32,13 @@ custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 0
 text = "Bonfire already full"
+script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Timer" type="Timer" parent="Notification"]
+one_shot = true
 
 [node name="Inventory" type="VBoxContainer" parent="."]
 anchor_top = 1.0
@@ -73,3 +78,4 @@ custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 0
 text = "Weight: 13/20"
+[connection signal="timeout" from="Notification/Timer" to="Notification" method="_on_Timer_timeout"]
