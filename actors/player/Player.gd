@@ -13,7 +13,7 @@ func _physics_process(_delta: float) -> void:
 
 func get_mouse_position() -> Vector3:
 	var camera = get_viewport().get_camera()
-	var depth = Vector3.ZERO.distance_to(camera.translation)
+	var depth = global_transform.origin.distance_to(camera.global_transform.origin)
 	var mouse_position = camera.project_position(get_viewport().get_mouse_position(), depth)
 	mouse_position.y = translation.y
 	return mouse_position
