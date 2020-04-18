@@ -7,10 +7,10 @@
 [ext_resource path="res://static/trees/twig/PickupTwig.tscn" type="PackedScene" id=5]
 
 [sub_resource type="PlaneMesh" id=1]
-size = Vector2( 50, 50 )
+size = Vector2( 150, 150 )
 
 [sub_resource type="ConcavePolygonShape" id=2]
-data = PoolVector3Array( 25, 0, 25, -25, 0, 25, 25, 0, -25, -25, 0, 25, -25, 0, -25, 25, 0, -25 )
+data = PoolVector3Array( 75, 0, 75, -75, 0, 75, 75, 0, -75, -75, 0, 75, -75, 0, -75, 75, 0, -75 )
 
 [node name="Game" type="Node"]
 script = ExtResource( 2 )
@@ -20,13 +20,13 @@ transform = Transform( 0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 0
 mesh = SubResource( 1 )
 material/0 = null
 
+[node name="Bonfire" parent="MeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.65685, 1, -8.48528 )
+
 [node name="StaticBody" type="StaticBody" parent="MeshInstance"]
 
 [node name="CollisionShape" type="CollisionShape" parent="MeshInstance/StaticBody"]
 shape = SubResource( 2 )
-
-[node name="Bonfire" parent="MeshInstance" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.65685, 1, -8.48528 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 

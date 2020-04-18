@@ -1,14 +1,16 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://static/trees/normal/Tree.gd" type="Script" id=1]
 [ext_resource path="res://static/trees/normal/normal-stage-1.tres" type="CylinderMesh" id=2]
 [ext_resource path="res://static/trees/normal/normal-stage-3.tres" type="CylinderMesh" id=3]
 [ext_resource path="res://static/trees/normal/normal-stage-2.tres" type="CylinderMesh" id=4]
+[ext_resource path="res://static/trees/normal/PickupNormalWood.tscn" type="PackedScene" id=5]
 
 [node name="Tree" type="Spatial"]
 script = ExtResource( 1 )
 time_to_regrow_stage = 5.0
 stage_meshes = [ ExtResource( 2 ), ExtResource( 4 ), ExtResource( 3 ) ]
+drops = [ ExtResource( 5 ) ]
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 mesh = ExtResource( 3 )

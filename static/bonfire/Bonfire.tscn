@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://static/bonfire/Bonfire.gd" type="Script" id=1]
 [ext_resource path="res://static/trees/twig/TwigInfo.tscn" type="PackedScene" id=2]
@@ -7,6 +7,9 @@
 
 [sub_resource type="SpatialMaterial" id=2]
 albedo_color = Color( 0.866667, 0.470588, 0.0117647, 1 )
+
+[sub_resource type="CylinderShape" id=3]
+radius = 25.0
 
 [node name="Bonfire" type="Spatial"]
 script = ExtResource( 1 )
@@ -29,4 +32,11 @@ one_shot = true
 [node name="Twig4" parent="Woods" instance=ExtResource( 2 )]
 
 [node name="Twig5" parent="Woods" instance=ExtResource( 2 )]
+
+[node name="Area" type="Area" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="Area"]
+shape = SubResource( 3 )
 [connection signal="timeout" from="CurrentWoodTimer" to="." method="_on_CurrentWoodTimer_timeout"]
+[connection signal="body_entered" from="Area" to="." method="_on_Area_body_entered"]
+[connection signal="body_exited" from="Area" to="." method="_on_Area_body_exited"]
