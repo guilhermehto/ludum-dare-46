@@ -44,6 +44,7 @@ func _craft_axe() -> void:
 	
 	var axe = load(craftables.axe.item_path).instance()
 	player_ref.hands.add_child(axe)
+	axe.connect("hit", player_ref, "_on_axe_hit")
 	axe.translation = Vector3.ZERO
 	_update_ui()
 	GlobalSignals.emit_notified("Axe crafted")

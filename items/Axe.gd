@@ -1,5 +1,7 @@
 extends Spatial
 
+signal hit
+
 onready var cooldown : Timer = $Cooldown
 onready var hit_timer : Timer = $HitTime
 onready var hitbox : Area = $Area/CollisionShape
@@ -11,6 +13,7 @@ func _input(event: InputEvent) -> void:
 		cooldown.start()
 		hit_timer.start()
 		hitbox.disabled = false
+		emit_signal("hit")
 
 func _on_Area_body_entered(body: Node) -> void:
 	if not hit_timer.is_stopped():
