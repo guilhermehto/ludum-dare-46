@@ -7,6 +7,11 @@ export var pickup_distance : float = 1.0
 
 var target : Spatial
 
+func _ready() -> void:
+	randomize()
+	scale *= rand_range(0.75, 1.25)
+	rotate_y(randf() * 3.65)
+
 func _process(delta: float) -> void:
 	if not target:
 		return

@@ -109,4 +109,5 @@ omni_attenuation = 0.143588
 [node name="GUI" parent="." instance=ExtResource( 8 )]
 
 [node name="CraftingTable" parent="." instance=ExtResource( 11 )]
+transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 2.15963, 1.90735e-06, 4.86822 )
 [connection signal="timeout" from="ShadowTest/Timer" to="ShadowTest" method="_on_Timer_timeout"]
