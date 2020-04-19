@@ -1,0 +1,130 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://interface/fonts/small-pixel_32.tres" type="DynamicFont" id=1]
+[ext_resource path="res://actors/player/PlayerMesh.tscn" type="PackedScene" id=2]
+[ext_resource path="res://interface/start-menu/StartMenu.gd" type="Script" id=3]
+[ext_resource path="res://items/AxeMesh.tscn" type="PackedScene" id=4]
+[ext_resource path="res://interface/fonts/small-pixel.tres" type="DynamicFont" id=5]
+[ext_resource path="res://interface/Label.tscn" type="PackedScene" id=6]
+[ext_resource path="res://interface/icons/arrow.png" type="Texture" id=7]
+
+[sub_resource type="Animation" id=2]
+resource_name = "idle"
+length = 0.4
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 5, 0 ) ]
+}
+
+[sub_resource type="Environment" id=1]
+background_mode = 1
+background_color = Color( 0.419608, 0.533333, 0.521569, 1 )
+ambient_light_color = Color( 1, 0.901961, 0.901961, 1 )
+
+[node name="StartMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = 10.0
+margin_right = -10.0
+margin_bottom = -10.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="Title" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -172.0
+margin_right = 172.0
+margin_bottom = 32.0
+custom_fonts/font = ExtResource( 1 )
+text = "Cleiton: The viking"
+
+[node name="Cleiton" type="Label" parent="."]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -164.616
+margin_top = 52.263
+margin_right = -97.6161
+margin_bottom = 60.263
+custom_fonts/font = ExtResource( 5 )
+text = "This is cleiton
+He's a viking"
+align = 1
+
+[node name="MenuOptions" type="VBoxContainer" parent="."]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 37.0
+margin_top = -20.0
+margin_right = 40.0
+margin_bottom = 20.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Play" parent="MenuOptions" instance=ExtResource( 6 )]
+text = "Play"
+
+[node name="Exit" parent="MenuOptions" instance=ExtResource( 6 )]
+margin_top = 12.0
+margin_bottom = 20.0
+text = "Exit"
+
+[node name="Footer" parent="." instance=ExtResource( 6 )]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -8.0
+margin_bottom = 0.0
+text = "Game made by @datoliveira for #ldjam46"
+
+[node name="SelectionArrow" type="Node2D" parent="."]
+position = Vector2( 23.4812, 94.1387 )
+
+[node name="Sprite" type="Sprite" parent="SelectionArrow"]
+position = Vector2( 0.738549, 0 )
+texture = ExtResource( 7 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SelectionArrow/Sprite"]
+autoplay = "idle"
+anims/idle = SubResource( 2 )
+
+[node name="Worldelements" type="Spatial" parent="."]
+
+[node name="Spatial" type="Spatial" parent="Worldelements"]
+
+[node name="Camera" type="Camera" parent="Worldelements"]
+transform = Transform( 1, 0, 0, 0, 0.98006, 0.198701, 0, -0.198701, 0.98006, -3.75102, 3.68392, 8.51096 )
+
+[node name="PlayerMesh" parent="Worldelements" instance=ExtResource( 2 )]
+
+[node name="Armature" parent="Worldelements/PlayerMesh" index="0"]
+bones/14/bound_children = [ NodePath("handrBoneAttachment") ]
+
+[node name="handrBoneAttachment" parent="Worldelements/PlayerMesh/Armature" index="2"]
+transform = Transform( -1.1228, -0.0817466, -0.0917011, -0.122143, 0.652604, 0.91376, -0.0131494, 0.918256, -0.657573, -1.22556, 0.57711, 0.507624 )
+
+[node name="AxeMesh" parent="Worldelements/PlayerMesh/Armature/handrBoneAttachment/HandPosition" index="0" instance=ExtResource( 4 )]
+transform = Transform( 0.0824045, 2.98023e-08, -0.594314, -0.574064, 0.155292, -0.0795966, 0.15382, 0.579555, 0.0213279, 0.0196113, -0.30401, -0.588102 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Worldelements"]
+environment = SubResource( 1 )
+[connection signal="animation_finished" from="Worldelements/PlayerMesh/Armature/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+
+[editable path="Worldelements/PlayerMesh"]
