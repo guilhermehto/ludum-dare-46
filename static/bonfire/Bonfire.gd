@@ -23,10 +23,9 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if not particles.emitting:
 		return
-	
 	for body in warm_bodies:
 		var distance_from_bonfire = global_transform.origin.distance_to(body.get_parent().global_transform.origin)
-		var distance_modifier = distance_from_bonfire / effective_shape.shape.radius
+		var distance_modifier = 1 - distance_from_bonfire / effective_shape.shape.radius
 		body.temperature += heating_up_rate * delta * max(distance_modifier, minimun_effectiviness)
 
 func _on_CurrentWoodTimer_timeout() -> void:

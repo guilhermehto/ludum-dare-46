@@ -29,7 +29,6 @@ func _on_Timer_timeout() -> void:
 	timer.start()
 
 func set_intensity(value: float ) -> void:
-	print(value)
 	var children = lights.get_children()
 	for index in lights.get_child_count():
 		children[index].light_energy = starting_enegery[index] * value
