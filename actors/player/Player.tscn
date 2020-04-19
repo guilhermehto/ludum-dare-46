@@ -1,11 +1,10 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://actors/player/Player.gd" type="Script" id=1]
 [ext_resource path="res://actors/player/Camera.tscn" type="PackedScene" id=2]
 [ext_resource path="res://actors/player/Camera.gd" type="Script" id=3]
 [ext_resource path="res://actors/player/Inventory.gd" type="Script" id=4]
 [ext_resource path="res://actors/WarmBody.tscn" type="PackedScene" id=5]
-[ext_resource path="res://items/Axe.tscn" type="PackedScene" id=6]
 
 [sub_resource type="CapsuleMesh" id=1]
 radial_segments = 6
@@ -55,5 +54,3 @@ script = ExtResource( 4 )
 
 [node name="Hands" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.46751, -1.21104 )
-
-[node name="Axe" parent="Hands" instance=ExtResource( 6 )]

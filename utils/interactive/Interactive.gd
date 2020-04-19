@@ -25,6 +25,9 @@ func interact(player: Player) -> void:
 func _can_interact(player) -> bool:
 	return true
 
+func _player_exited() -> void:
+	pass
+
 func _on_Area_body_entered(body: Node) -> void:
 	if body is Player and _can_interact(body):
 		interaction_text.show()
@@ -34,3 +37,4 @@ func _on_Area_body_exited(body: Node) -> void:
 	if body is Player:
 		interaction_text.hide()
 		player_ref = null
+		_player_exited()
