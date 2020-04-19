@@ -23,6 +23,8 @@ func add_item(item) -> void:
 		})
 
 func remove_wood() -> Wood:
+	if woods.get_child_count() == 0:
+		return null
 	var removed_wood = woods.get_children()[0]
 	woods.remove_child(removed_wood)
 	

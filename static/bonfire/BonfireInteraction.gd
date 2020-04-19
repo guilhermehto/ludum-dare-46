@@ -3,6 +3,8 @@ extends Interactive
 func interact(player: Player) -> void:
 	var bonfire = get_parent()
 	var wood = player.inventory.remove_wood()
+	if wood == null:
+		GlobalSignals.emit_signal("notified", "You're out of wood")
 	var wood_added = bonfire.add_wood(wood)
 	if not wood_added:
 		player.inventory.add_item(wood)
