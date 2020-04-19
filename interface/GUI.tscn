@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://interface/fonts/small-pixel.tres" type="DynamicFont" id=1]
 [ext_resource path="res://interface/GUI.gd" type="Script" id=2]
@@ -6,6 +6,9 @@
 [ext_resource path="res://interface/Notification.gd" type="Script" id=4]
 [ext_resource path="res://interface/Counters.gd" type="Script" id=5]
 [ext_resource path="res://interface/Label.tscn" type="PackedScene" id=6]
+[ext_resource path="res://interface/icons/under-texture-progress.png" type="Texture" id=7]
+[ext_resource path="res://interface/icons/over-texture-progress.png" type="Texture" id=8]
+[ext_resource path="res://interface/Stats.gd" type="Script" id=9]
 
 [node name="GUI" type="Control"]
 anchor_right = 1.0
@@ -97,4 +100,29 @@ custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 0
 text = "Survived: 0 days"
 align = 2
+
+[node name="Stats" type="VBoxContainer" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Temperature" type="HBoxContainer" parent="Stats"]
+margin_right = 46.0
+margin_bottom = 8.0
+
+[node name="Label" parent="Stats/Temperature" instance=ExtResource( 6 )]
+margin_right = 26.0
+text = "Temp:"
+
+[node name="TextureProgress" type="TextureProgress" parent="Stats/Temperature"]
+margin_left = 30.0
+margin_right = 46.0
+margin_bottom = 8.0
+value = 50.0
+texture_over = ExtResource( 8 )
+texture_progress = ExtResource( 7 )
+tint_progress = Color( 0.905882, 0.862745, 0.215686, 1 )
 [connection signal="timeout" from="Notification/Timer" to="Notification" method="_on_Timer_timeout"]

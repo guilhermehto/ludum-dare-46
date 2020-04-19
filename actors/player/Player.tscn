@@ -36,14 +36,11 @@ script = ExtResource( 4 )
 [node name="PlayerMesh" parent="." instance=ExtResource( 6 )]
 transform = Transform( -1, 0, 8.9407e-08, 0, 1, 0, -8.9407e-08, 0, -1, 0, 0, 0 )
 
-[node name="Armature" parent="PlayerMesh" index="0"]
-bones/14/bound_children = [ NodePath("handrBoneAttachment") ]
-
 [node name="AnimationPlayer" parent="PlayerMesh/Armature" index="0"]
 playback_speed = 1.4
 
 [node name="handrBoneAttachment" parent="PlayerMesh/Armature" index="2"]
-transform = Transform( -0.243079, 0.287446, 0.926437, 0.640916, 0.764499, -0.0690375, -0.728105, 0.576987, -0.370063, -1.70821, 1.75162, -1.06169 )
+transform = Transform( -0.636129, -0.0463143, 0.77019, 0.768157, 0.0559264, 0.637813, -0.0726138, 0.997359, 2.5761e-07, -2.38702, 1.57801, -0.00841982 )
 
 [node name="Hands" type="Spatial" parent="PlayerMesh/Armature/handrBoneAttachment/HandPosition" index="0"]
 transform = Transform( 0.340825, 0.501564, -0.795157, -0.810905, 0.584793, 0.0212943, 0.47568, 0.637536, 0.606033, -0.0975862, -0.352182, -0.273852 )
