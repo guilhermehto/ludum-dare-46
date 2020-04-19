@@ -2,7 +2,7 @@ extends Spatial
 class_name WoodTree
 
 onready var timer : Timer = $Timer
-onready var mesh_instace : MeshInstance = $MeshInstance
+onready var meshes : Spatial = $Meshes
 
 export var time_to_regrow_stage : float = 120.0
 export var stage_meshes = []
@@ -16,16 +16,23 @@ var current_hp = initial_hp
 func _ready() -> void:
 	randomize()
 	timer.wait_time = time_to_regrow_stage
+	scale *= rand_range(0.75, 1.25)
+	rotate_y(randf() * 3.65)
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_accept"):
 		_fall()
 
+func _show_mesh(index: int) -> void:
+	for mesh in meshes.get_children():
+		mesh.hide()
+	meshes.get_children()[index].show()
+
 func _fall() -> void:
 	# drop stuff
 	growth_stage = 1
 	timer.start()
-	mesh_instace.mesh = stage_meshes[0]
+	_show_mesh(0)
 	for i in rand_range(max_drops / 2, max_drops):
 		var drop = drops[randi() % drops.size()].instance()
 		add_child(drop)
@@ -35,7 +42,7 @@ func _fall() -> void:
 	
 func _on_Timer_timeout() -> void:
 	growth_stage += 1
-	mesh_instace.mesh = stage_meshes[growth_stage - 1]
+	_show_mesh(growth_stage - 1)
 	
 	if growth_stage < 3:
 		timer.start()
