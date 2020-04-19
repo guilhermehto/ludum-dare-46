@@ -19,5 +19,5 @@ shape = SubResource( 1 )
 temperature = 31.0
 
 [node name="villager" parent="." instance=ExtResource( 3 )]
-transform = Transform( 0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, -1, 0 )
+transform = Transform( 0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, -1, 0 )
 [connection signal="cold_damaged" from="WarmBody" to="." method="_on_WarmBody_cold_damaged"]
