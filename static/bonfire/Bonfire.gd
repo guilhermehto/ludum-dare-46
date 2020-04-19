@@ -5,6 +5,8 @@ signal unlit
 onready var current_wood_timer : Timer = $CurrentWoodTimer
 onready var woods : Node = $Woods
 onready var effective_shape = $Area/CollisionShape
+onready var particles = $Particles
+onready var lights = $Lights
 
 export var max_woods : int = 10
 export var minimun_effectiviness : float = 0.25
@@ -18,6 +20,9 @@ func _ready() -> void:
 	woods.remove_child(woods.get_children()[0])
 
 func _process(delta: float) -> void:
+	if not particles.emitting:
+		return
+	
 	for body in warm_bodies:
 		var distance_from_bonfire = global_transform.origin.distance_to(body.get_parent().global_transform.origin)
 		var distance_modifier = distance_from_bonfire / effective_shape.shape.radius
@@ -25,17 +30,23 @@ func _process(delta: float) -> void:
 
 func _on_CurrentWoodTimer_timeout() -> void:
 	if woods.get_child_count() == 0:
+		particles.emitting = false
+		lights.visible = false
 		emit_signal("unlit")
 		return
-	
 	current_wood_timer.wait_time = woods.get_children()[0].burning_time_s
 	current_wood_timer.start()
 	woods.remove_child(woods.get_children()[0])
+	lights.intensity = int(10 / woods.get_child_count())
 
 func add_wood(wood) -> bool:
 	if woods.get_child_count() == max_woods:
 		return false
-
+	
+	if not particles.emitting:
+		particles.emitting = true
+		lights.visible = true
+	lights.intensity = int(10 / woods.get_child_count())
 	woods.add_child(wood)
 	return true
 

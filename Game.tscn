@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://actors/player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game.gd" type="Script" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://static/trees/normal/Tree.tscn" type="PackedScene" id=4]
 [ext_resource path="res://static/trees/twig/PickupTwig.tscn" type="PackedScene" id=5]
 [ext_resource path="res://actors/villager/Villager.tscn" type="PackedScene" id=6]
-[ext_resource path="res://static/light/ShadowTest.gd" type="Script" id=7]
 [ext_resource path="res://interface/GUI.tscn" type="PackedScene" id=8]
 [ext_resource path="res://utils/GlobalSignals.tscn" type="PackedScene" id=9]
 [ext_resource path="res://static/weather/Weather.tscn" type="PackedScene" id=10]
@@ -68,46 +67,14 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -23, 1, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 1, 7 )
 
 [node name="Villager" parent="." instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.24648, 1.5, -14.3928 )
+transform = Transform( 0.258819, 0, -0.965926, 0, 1, 0, 0.965926, 0, 0.258819, -1.24648, 1.5, -14.3928 )
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 transform = Transform( -0.352358, -0.735598, 0.578567, 0.155297, 0.563688, 0.811258, -0.922891, 0.375703, -0.0843833, 0, 18.5289, 0 )
 light_energy = 0.1
 shadow_enabled = true
 
-[node name="ShadowTest" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.83859, 7.32671, -12.5979 )
-script = ExtResource( 7 )
-
-[node name="Timer" type="Timer" parent="ShadowTest"]
-one_shot = true
-
-[node name="Lights" type="Spatial" parent="ShadowTest"]
-
-[node name="OmniLight" type="OmniLight" parent="ShadowTest/Lights"]
-light_color = Color( 0.960784, 0.635294, 0.376471, 1 )
-light_energy = 0.75
-shadow_enabled = true
-omni_range = 15.0
-omni_attenuation = 0.31864
-
-[node name="OmniLight2" type="OmniLight" parent="ShadowTest/Lights"]
-light_color = Color( 0.870588, 0.815686, 0.243137, 1 )
-light_energy = 0.5
-light_specular = 0.7
-shadow_enabled = true
-omni_range = 10.0
-omni_attenuation = 0.287175
-
-[node name="OmniLight3" type="OmniLight" parent="ShadowTest/Lights"]
-light_color = Color( 1, 0.678431, 0, 1 )
-shadow_enabled = true
-shadow_bias = 16.0
-omni_range = 8.0
-omni_attenuation = 0.143588
-
 [node name="GUI" parent="." instance=ExtResource( 8 )]
 
 [node name="CraftingTable" parent="." instance=ExtResource( 11 )]
 transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 2.15963, 1.90735e-06, 4.86822 )
-[connection signal="timeout" from="ShadowTest/Timer" to="ShadowTest" method="_on_Timer_timeout"]

@@ -1,23 +1,59 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://static/bonfire/Bonfire.gd" type="Script" id=1]
 [ext_resource path="res://static/trees/twig/TwigInfo.tscn" type="PackedScene" id=2]
 [ext_resource path="res://static/bonfire/BonfireInteraction.tscn" type="PackedScene" id=3]
+[ext_resource path="res://static/bonfire/BonfireMesh.tscn" type="PackedScene" id=4]
+[ext_resource path="res://static/bonfire/Lights.tscn" type="PackedScene" id=5]
 
-[sub_resource type="CubeMesh" id=1]
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.993671, 0.0522727 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="SpatialMaterial" id=2]
-albedo_color = Color( 0.866667, 0.470588, 0.0117647, 1 )
+[sub_resource type="CurveTexture" id=2]
+curve = SubResource( 1 )
 
-[sub_resource type="CylinderShape" id=3]
+[sub_resource type="ParticlesMaterial" id=3]
+emission_shape = 2
+emission_box_extents = Vector3( 1, 0, 1 )
+gravity = Vector3( 0, 9.8, 0 )
+radial_accel = -5.0
+scale_curve = SubResource( 2 )
+color = Color( 0.611765, 0.611765, 0.611765, 1 )
+
+[sub_resource type="SpatialMaterial" id=4]
+params_cull_mode = 2
+albedo_color = Color( 0.921569, 0.556863, 0.203922, 1 )
+metallic_specular = 0.0
+emission_enabled = true
+emission = Color( 0.784314, 0.141176, 0.141176, 1 )
+emission_energy = 1.0
+emission_operator = 0
+emission_on_uv2 = false
+
+[sub_resource type="SphereMesh" id=5]
+material = SubResource( 4 )
+radius = 0.5
+height = 1.0
+radial_segments = 6
+rings = 4
+is_hemisphere = true
+
+[sub_resource type="CylinderShape" id=6]
 radius = 25.0
 
 [node name="Bonfire" type="Spatial"]
 script = ExtResource( 1 )
 
-[node name="MeshInstance" type="MeshInstance" parent="."]
-mesh = SubResource( 1 )
-material/0 = SubResource( 2 )
+[node name="BonfireMesh" parent="." instance=ExtResource( 4 )]
+
+[node name="Particles" type="Particles" parent="."]
+layers = 524288
+cast_shadow = 0
+amount = 64
+preprocess = 1.0
+randomness = 1.0
+process_material = SubResource( 3 )
+draw_pass_1 = SubResource( 5 )
 
 [node name="CurrentWoodTimer" type="Timer" parent="."]
 one_shot = true
@@ -37,7 +73,7 @@ one_shot = true
 [node name="Area" type="Area" parent="."]
 
 [node name="CollisionShape" type="CollisionShape" parent="Area"]
-shape = SubResource( 3 )
+shape = SubResource( 6 )
 
 [node name="OmniLight" type="OmniLight" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
@@ -46,6 +82,9 @@ shadow_enabled = true
 omni_range = 8.76002
 
 [node name="BonfireInteraction" parent="." instance=ExtResource( 3 )]
+
+[node name="Lights" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0 )
 [connection signal="timeout" from="CurrentWoodTimer" to="." method="_on_CurrentWoodTimer_timeout"]
 [connection signal="body_entered" from="Area" to="." method="_on_Area_body_entered"]
 [connection signal="body_exited" from="Area" to="." method="_on_Area_body_exited"]
