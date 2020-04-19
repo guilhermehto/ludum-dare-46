@@ -25,7 +25,7 @@ func _update_ui() -> void:
 	_update_craftables()
 	for child in crafting_list.get_children():
 		var key = child.name.to_lower()
-		child.visible = craftables[key].can_craft
+		child.button.disabled = !craftables[key].can_craft
 
 func _update_craftables() -> void:
 	var wood_count = player_ref.inventory.woods.get_child_count()
