@@ -5,7 +5,7 @@ onready var timer = $Timer
 
 var initial_ranges = []
 
-var intensity : int setget set_intensity
+var intensity : float setget set_intensity
 
 var starting_enegery = []
 
@@ -28,7 +28,8 @@ func _on_Timer_timeout() -> void:
 	timer.wait_time = randf() * 0.75
 	timer.start()
 
-func set_intensity(value: int ) -> void:
+func set_intensity(value: float ) -> void:
+	print(value)
 	var children = lights.get_children()
 	for index in lights.get_child_count():
-		children[index].light_energy = starting_enegery[index] - 0.25 * (value - 1)
+		children[index].light_energy = starting_enegery[index] * value
