@@ -19,8 +19,8 @@ func _ready() -> void:
 	GlobalSignals.connect("game_ended", self, "_on_game_ended")
 	GlobalSignals.connect("day_passed", self, "_on_day_passed")
 
-func _on_day_passed() -> void:
-	passed_days += 1
+func _on_day_passed(passed) -> void:
+	passed_days = passed
 
 func _on_game_ended(reason) -> void:
 	GlobalSignals.emit_notified(reason)

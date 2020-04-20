@@ -39,7 +39,7 @@ func _fall() -> void:
 		var drop = drops[randi() % drops.size()].instance()
 		add_child(drop)
 		drop.set_as_toplevel(true)
-		var random_direction = Vector3(randi() % 3, 0.5, randi() % 3).normalized()
+		var random_direction = Vector3(randi() % 3, 1, randi() % 3).normalized()
 		drop.global_transform.origin = global_transform.origin + random_direction * Vector3(randi() % 5, 0, randi() % 5)
 	
 func _on_Timer_timeout() -> void:

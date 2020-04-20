@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://actors/player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game.gd" type="Script" id=2]
@@ -14,6 +14,8 @@
 [ext_resource path="res://static/props/Statue.tscn" type="PackedScene" id=12]
 [ext_resource path="res://static/props/Fence.tscn" type="PackedScene" id=13]
 [ext_resource path="res://materials/Snow.tres" type="Material" id=14]
+[ext_resource path="res://interface/Label.tscn" type="PackedScene" id=15]
+[ext_resource path="res://interface/Tutorial.gd" type="Script" id=16]
 
 [sub_resource type="PlaneMesh" id=1]
 size = Vector2( 150, 150 )
@@ -567,3 +569,60 @@ transform = Transform( 0.372129, 0, -0.928181, 0, 1, 0, 0.928181, 0, 0.372129, -
 
 [node name="Villager3" parent="GameWorld/Map/Villagers" instance=ExtResource( 6 )]
 transform = Transform( -0.566953, 0, -0.82375, 0, 1, 0, 0.82375, 0, -0.566953, -2.62604, 1.5, -9.44025 )
+
+[node name="Tutorial" type="Control" parent="GameWorld"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 16 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect2" type="ColorRect" parent="GameWorld/Tutorial"]
+margin_left = 69.0
+margin_top = 6.0
+margin_right = 237.0
+margin_bottom = 23.0
+color = Color( 0, 0, 0, 0.686275 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Temperature" parent="GameWorld/Tutorial" instance=ExtResource( 15 )]
+margin_left = 73.0
+margin_top = 10.0
+margin_right = 235.0
+margin_bottom = 18.0
+text = "<- careful with your temperature"
+align = 1
+
+[node name="ColorRect" type="ColorRect" parent="GameWorld/Tutorial"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -78.0
+margin_top = 17.0
+margin_right = 77.0
+margin_bottom = 57.0
+color = Color( 0, 0, 0, 0.686275 )
+
+[node name="Instructions" parent="GameWorld/Tutorial" instance=ExtResource( 15 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -81.0
+margin_top = 21.5973
+margin_right = 81.0
+margin_bottom = 51.5973
+text = "- add wood to bonfire
+- craft itens in crafting table
+- chop down trees"
+align = 1
+
+[node name="Timer" type="Timer" parent="GameWorld/Tutorial"]
+wait_time = 8.0
+one_shot = true
+autostart = true
+[connection signal="timeout" from="GameWorld/Tutorial/Timer" to="GameWorld/Tutorial" method="_on_Timer_timeout"]
