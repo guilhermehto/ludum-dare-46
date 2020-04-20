@@ -37,6 +37,7 @@ func _on_CurrentWoodTimer_timeout() -> void:
 		particles.emitting = false
 		lights.visible = false
 		emit_signal("unlit")
+		GlobalSignals.emit_game_ended("Bonfire extinguished")
 		return
 	var calculated_burn_time = woods.get_children()[0].burning_time_s - woods.get_children()[0].burning_time_s * burn_rate
 	calculated_burn_time = max(calculated_burn_time, 3.5)

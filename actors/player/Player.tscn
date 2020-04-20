@@ -44,5 +44,6 @@ transform = Transform( -0.636129, -0.0463143, 0.77019, 0.768157, 0.0559264, 0.63
 
 [node name="Hands" type="Spatial" parent="PlayerMesh/Armature/handrBoneAttachment/HandPosition" index="0"]
 transform = Transform( 0.340825, 0.501564, -0.795157, -0.810905, 0.584793, 0.0212943, 0.47568, 0.637536, 0.606033, -0.0975862, -0.352182, -0.273852 )
+[connection signal="died" from="WarmBody" to="." method="_on_WarmBody_died"]
 
 [editable path="PlayerMesh"]

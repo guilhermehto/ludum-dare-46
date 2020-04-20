@@ -8,8 +8,10 @@ onready var warm_body = $WarmBody
 onready var hands = $"PlayerMesh/Armature/handrBoneAttachment/HandPosition/Hands"
 onready var animation_player = $PlayerMesh/Armature/AnimationPlayer
 
+var dead : bool = false
+
 func _physics_process(_delta: float) -> void:
-	if animation_player.current_animation == "Hit":
+	if animation_player.current_animation == "Hit" or dead:
 		return
 	
 	var horizontal_movement := int(Input.is_action_pressed("move_right")) - int(Input.is_action_pressed("move_left"))
@@ -42,3 +44,8 @@ func _on_AnimationPlayer_animation_finished(anim_name: String) -> void:
 
 func _on_axe_hit() -> void:
 	animation_player.play("Hit")
+
+func _on_WarmBody_died():
+	dead = true
+	animation_player.stop()
+	GlobalSignals.emit_game_ended("Cleiton got hypothermia")
