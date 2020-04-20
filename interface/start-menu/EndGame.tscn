@@ -1,0 +1,106 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://interface/fonts/small-pixel_32.tres" type="DynamicFont" id=1]
+[ext_resource path="res://static/bonfire/Bonfire.tscn" type="PackedScene" id=2]
+[ext_resource path="res://actors/villager/VillagerMesh.tscn" type="PackedScene" id=3]
+[ext_resource path="res://interface/start-menu/EndGame.gd" type="Script" id=4]
+[ext_resource path="res://interface/Label.tscn" type="PackedScene" id=5]
+[ext_resource path="res://materials/Snow.tres" type="Material" id=6]
+
+[sub_resource type="Environment" id=1]
+background_mode = 1
+background_color = Color( 0.329412, 0.376471, 0.392157, 1 )
+
+[sub_resource type="PlaneMesh" id=2]
+size = Vector2( 200, 200 )
+
+[node name="EndGame" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = 10.0
+margin_right = -10.0
+margin_bottom = -10.0
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 1 )
+
+[node name="Label2" parent="." instance=ExtResource( 5 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -126.0
+margin_top = -8.0
+margin_right = 126.0
+margin_bottom = 0.0
+text = "Thanks for playing!"
+align = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -126.0
+margin_right = 126.0
+margin_bottom = 102.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="VBoxContainer"]
+margin_right = 252.0
+margin_bottom = 102.0
+custom_fonts/font = ExtResource( 1 )
+text = "you survived
+5
+days"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" parent="VBoxContainer" instance=ExtResource( 5 )]
+margin_top = 106.0
+margin_right = 252.0
+margin_bottom = 114.0
+text = "press enter to retry"
+align = 1
+
+[node name="3DElements" type="Spatial" parent="."]
+
+[node name="Camera" type="Camera" parent="3DElements"]
+transform = Transform( 1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 20.1876, 18.1777 )
+
+[node name="Rotate" type="Spatial" parent="3DElements"]
+
+[node name="Bonfire" parent="3DElements/Rotate" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.468158, 0 )
+infinite = true
+
+[node name="VillagerMesh" parent="3DElements/Rotate" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6 )
+
+[node name="VillagerMesh2" parent="3DElements/Rotate" instance=ExtResource( 3 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 7, 0, 0 )
+
+[node name="VillagerMesh3" parent="3DElements/Rotate" instance=ExtResource( 3 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -7, 0, 0 )
+
+[node name="VillagerMesh4" parent="3DElements/Rotate" instance=ExtResource( 3 )]
+transform = Transform( -1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 0, 7 )
+
+[node name="MeshInstance" type="MeshInstance" parent="3DElements"]
+mesh = SubResource( 2 )
+material/0 = ExtResource( 6 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="3DElements"]
+transform = Transform( 1, 0, 0, 0, 0.863017, -0.505175, 0, 0.505175, 0.863017, 0, 0, -28.4529 )
+mesh = SubResource( 2 )
+material/0 = ExtResource( 6 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="3DElements"]
+transform = Transform( 1, 0, 0, 0, 0.856799, -0.515651, 0, 0.515651, 0.856799, 0, 10.7084, 0 )

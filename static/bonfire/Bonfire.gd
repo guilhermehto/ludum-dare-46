@@ -8,6 +8,7 @@ onready var effective_shape = $Area/CollisionShape
 onready var particles = $Particles
 onready var lights = $Lights
 
+export var infinite : bool = false
 export var max_woods : int = 10
 export var minimun_effectiviness : float = 0.25
 export var heating_up_rate : float = 2.0
@@ -29,6 +30,8 @@ func _process(delta: float) -> void:
 		body.temperature += heating_up_rate * delta * max(distance_modifier, minimun_effectiviness)
 
 func _on_CurrentWoodTimer_timeout() -> void:
+	if infinite:
+		return
 	if woods.get_child_count() == 0:
 		particles.emitting = false
 		lights.visible = false
