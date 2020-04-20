@@ -10,10 +10,6 @@ onready var tween : Tween = $Tween
 var game_end_iu := "res://interface/start-menu/EndGame.tscn"
 var passed_days : int = 0
 
-func _input(event):
-	if event.is_action_pressed("ui_accept"):
-		_on_game_ended('cu')
-
 func _ready() -> void:
 	gui.initialize(player)
 	GlobalSignals.connect("game_ended", self, "_on_game_ended")
