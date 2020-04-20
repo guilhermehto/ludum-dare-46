@@ -15,9 +15,7 @@ func _input(event: InputEvent) -> void:
 		hit_timer.start()
 		hitbox.disabled = false
 		emit_signal("hit")
-		hits -= 1
-		if hits == 0:
-			brake_axe()
+		
 
 func brake_axe() -> void:
 	GlobalSignals.emit_notified("Your axe broke")
@@ -28,6 +26,9 @@ func _on_Area_body_entered(body: Node) -> void:
 		if body is WoodTree:
 			body.hit(damage)
 			hitbox.disabled = true
+			hits -= 1
+			if hits == 0:
+				brake_axe()
 
 func _on_HitTime_timeout() -> void:
 	hitbox.disabled = true
