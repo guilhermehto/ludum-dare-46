@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://static/trees/normal/Tree.gd" type="Script" id=1]
 [ext_resource path="res://static/trees/normal/normal-stage-1.tres" type="CylinderMesh" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://static/trees/normal/NormalTreeModel.tscn" type="PackedScene" id=6]
 [ext_resource path="res://static/trees/normal/TreeStub.tscn" type="PackedScene" id=7]
 [ext_resource path="res://static/trees/normal/TreeStage2.tscn" type="PackedScene" id=8]
+[ext_resource path="res://static/trees/normal/HitParticles.tscn" type="PackedScene" id=9]
 
 [sub_resource type="ConvexPolygonShape" id=1]
 points = PoolVector3Array( 0, 2, 1, 0.707107, 2, 0.707107, 1, 2, 6.12303e-17, 0.707107, 2, -0.707107, 1.22461e-16, 2, -1, -0.707107, 2, -0.707107, -1, 2, -1.83691e-16, -0.707107, 2, 0.707107, -2.44921e-16, 2, 1, 0, 1.2, 1, 0.707107, 1.2, 0.707107, 1, 1.2, 6.12303e-17, 0.707107, 1.2, -0.707107, 1.22461e-16, 1.2, -1, -0.707107, 1.2, -0.707107, -1, 1.2, -1.83691e-16, -0.707107, 1.2, 0.707107, -2.44921e-16, 1.2, 1, 0, 0.4, 1, 0.707107, 0.4, 0.707107, 1, 0.4, 6.12303e-17, 0.707107, 0.4, -0.707107, 1.22461e-16, 0.4, -1, -0.707107, 0.4, -0.707107, -1, 0.4, -1.83691e-16, -0.707107, 0.4, 0.707107, -2.44921e-16, 0.4, 1, 0, -0.4, 1, 0.707107, -0.4, 0.707107, 1, -0.4, 6.12303e-17, 0.707107, -0.4, -0.707107, 1.22461e-16, -0.4, -1, -0.707107, -0.4, -0.707107, -1, -0.4, -1.83691e-16, -0.707107, -0.4, 0.707107, -2.44921e-16, -0.4, 1, 0, -1.2, 1, 0.707107, -1.2, 0.707107, 1, -1.2, 6.12303e-17, 0.707107, -1.2, -0.707107, 1.22461e-16, -1.2, -1, -0.707107, -1.2, -0.707107, -1, -1.2, -1.83691e-16, -0.707107, -1.2, 0.707107, -2.44921e-16, -1.2, 1, 0, -2, 1, 0.707107, -2, 0.707107, 1, -2, 6.12303e-17, 0.707107, -2, -0.707107, 1.22461e-16, -2, -1, -0.707107, -2, -0.707107, -1, -2, -1.83691e-16, -0.707107, -2, 0.707107, -2.44921e-16, -2, 1, 0, 2, 0, 0, 2, 1, 0.707107, 2, 0.707107, 1, 2, 6.12303e-17, 0.707107, 2, -0.707107, 1.22461e-16, 2, -1, -0.707107, 2, -0.707107, -1, 2, -1.83691e-16, -0.707107, 2, 0.707107, -2.44921e-16, 2, 1, 0, -2, 0, 0, -2, 1, 0.707107, -2, 0.707107, 1, -2, 6.12303e-17, 0.707107, -2, -0.707107, 1.22461e-16, -2, -1, -0.707107, -2, -0.707107, -1, -2, -1.83691e-16, -0.707107, -2, 0.707107, -2.44921e-16, -2, 1 )
@@ -17,6 +18,9 @@ script = ExtResource( 1 )
 time_to_regrow_stage = 45.0
 stage_meshes = [ ExtResource( 2 ), ExtResource( 4 ), ExtResource( 3 ) ]
 drops = [ ExtResource( 5 ) ]
+hit_particles = ExtResource( 9 )
+
+[node name="Tween" type="Tween" parent="."]
 
 [node name="Meshes" type="Spatial" parent="."]
 
@@ -34,4 +38,7 @@ shape = SubResource( 1 )
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
+
+[node name="ParticlePosition" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, 0 )
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

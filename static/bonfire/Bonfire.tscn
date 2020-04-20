@@ -43,6 +43,7 @@ radius = 25.0
 
 [node name="Bonfire" type="Spatial"]
 script = ExtResource( 1 )
+max_woods = 20
 
 [node name="BonfireMesh" parent="." instance=ExtResource( 4 )]
 

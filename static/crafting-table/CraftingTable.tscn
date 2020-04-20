@@ -85,7 +85,7 @@ margin_bottom = 28.0
 
 [node name="Label" parent="UI/VBoxContainer/CraftingList/Axe/VBoxContainer" instance=ExtResource( 2 )]
 margin_right = 41.0
-text = "5 wood"
+text = "2 wood"
 align = 1
 
 [node name="Button" type="Button" parent="UI/VBoxContainer/CraftingList/Axe"]

@@ -7,6 +7,6 @@
 [node name="Twig" instance=ExtResource( 2 )]
 
 [node name="Info" parent="." index="1" instance=ExtResource( 1 )]
-weight = 5
+burning_time_s = 5.0
 
 [node name="TwigModel" parent="." index="3" instance=ExtResource( 3 )]

@@ -19,7 +19,7 @@ func _ready() -> void:
 	current_wood_timer.wait_time = woods.get_children()[0].burning_time_s
 	current_wood_timer.start()
 	woods.remove_child(woods.get_children()[0])
-	lights.intensity = woods.get_child_count() / 10.0
+	lights.intensity = woods.get_child_count() / float(max_woods)
 
 func _process(delta: float) -> void:
 	if not particles.emitting:
@@ -41,7 +41,7 @@ func _on_CurrentWoodTimer_timeout() -> void:
 	current_wood_timer.start()
 	woods.remove_child(woods.get_children()[0])
 	if woods.get_child_count() > 0:
-		lights.intensity = woods.get_child_count() / 10.0
+		lights.intensity = woods.get_child_count() / float(max_woods)
 
 func add_wood(wood) -> bool:
 	if woods.get_child_count() == max_woods:
@@ -50,7 +50,7 @@ func add_wood(wood) -> bool:
 	if not particles.emitting:
 		particles.emitting = true
 		lights.visible = true
-	lights.intensity = woods.get_child_count() / 10.0
+	lights.intensity = woods.get_child_count() / float(max_woods)
 	woods.add_child(wood)
 	return true
 
