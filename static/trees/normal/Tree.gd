@@ -5,6 +5,8 @@ onready var timer : Timer = $Timer
 onready var meshes : Spatial = $Meshes
 onready var tween : Tween = $Tween
 onready var particle_position : Position3D = $ParticlePosition
+onready var fall_audio : AudioStreamPlayer = $FallAudio
+onready var hit_audio : AudioStreamPlayer = $HitAudio
 
 export var time_to_regrow_stage : float = 120.0
 export var stage_meshes = []
@@ -32,6 +34,7 @@ func _fall() -> void:
 	growth_stage = 1
 	timer.start()
 	_show_mesh(0)
+	fall_audio.play()
 	for i in rand_range(max_drops / 2, max_drops):
 		var drop = drops[randi() % drops.size()].instance()
 		add_child(drop)
@@ -52,6 +55,7 @@ func hit(damage: float) -> void:
 	# todo: animations and shit
 	if growth_stage != 3:
 		return
+	hit_audio.play()
 	current_hp -= damage
 	var initial_scale = scale
 	var duration = 0.1

@@ -7,11 +7,13 @@ onready var inventory = $Inventory
 onready var warm_body = $WarmBody
 onready var hands = $"PlayerMesh/Armature/handrBoneAttachment/HandPosition/Hands"
 onready var animation_player = $PlayerMesh/Armature/AnimationPlayer
+onready var audio : AudioStreamPlayer = $Audio
 
 var dead : bool = false
 
 func _physics_process(_delta: float) -> void:
 	if animation_player.current_animation == "Hit" or dead:
+		audio.stop_walk()
 		return
 	
 	var horizontal_movement := int(Input.is_action_pressed("move_right")) - int(Input.is_action_pressed("move_left"))
@@ -22,11 +24,14 @@ func _physics_process(_delta: float) -> void:
 	move_and_slide(movement_vector * move_speed, Vector3.UP)
 	
 	if movement_vector != Vector3.ZERO:
+		if not audio.is_playing:
+			audio.start_walk()
 		if animation_player.current_animation != "Run":
 			animation_player.play("Run")
 		look_at(global_transform.origin + movement_vector * 3, Vector3.UP)
 	else:
 		if animation_player.current_animation != "Idle":
+			audio.stop_walk()
 			animation_player.play("Idle")
 		
 

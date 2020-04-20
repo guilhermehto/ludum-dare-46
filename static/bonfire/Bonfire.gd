@@ -7,6 +7,7 @@ onready var woods : Node = $Woods
 onready var effective_shape = $Area/CollisionShape
 onready var particles = $Particles
 onready var lights = $Lights
+onready var add_wood_audio = $AddWoodAudio
 
 export var infinite : bool = false
 export var max_woods : int = 10
@@ -52,7 +53,7 @@ func add_wood(wood) -> bool:
 	if woods.get_child_count() == max_woods:
 		return false
 	woods.add_child(wood)
-	
+	add_wood_audio.play()
 	if not particles.emitting:
 		particles.emitting = true
 		lights.visible = true

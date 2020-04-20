@@ -5,6 +5,7 @@ signal hit
 onready var cooldown : Timer = $Cooldown
 onready var hit_timer : Timer = $HitTime
 onready var hitbox : Area = $Area/CollisionShape
+onready var break_audio : AudioStreamPlayer = $BreakAudio
 
 export var damage : int = 15
 export var hits : int = 10
@@ -19,6 +20,8 @@ func _input(event: InputEvent) -> void:
 
 func brake_axe() -> void:
 	GlobalSignals.emit_notified("Your axe broke")
+	break_audio.play()
+	yield(break_audio, "finished")
 	queue_free()
 
 func _on_Area_body_entered(body: Node) -> void:
