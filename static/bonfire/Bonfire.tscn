@@ -62,14 +62,13 @@ one_shot = true
 [node name="Woods" type="Node" parent="."]
 
 [node name="Twig" parent="Woods" instance=ExtResource( 2 )]
+burning_time_s = 10.0
 
 [node name="Twig2" parent="Woods" instance=ExtResource( 2 )]
+burning_time_s = 5.0
 
 [node name="Twig3" parent="Woods" instance=ExtResource( 2 )]
-
-[node name="Twig4" parent="Woods" instance=ExtResource( 2 )]
-
-[node name="Twig5" parent="Woods" instance=ExtResource( 2 )]
+burning_time_s = 5.0
 
 [node name="Area" type="Area" parent="."]
 

@@ -13,7 +13,8 @@ export var max_woods : int = 10
 export var minimun_effectiviness : float = 0.25
 export var heating_up_rate : float = 2.0
 
-var warm_bodies = []
+var burn_rate : float = 0
+var player : Player = null
 
 func _ready() -> void:
 	current_wood_timer.wait_time = woods.get_children()[0].burning_time_s
@@ -22,12 +23,12 @@ func _ready() -> void:
 	lights.intensity = woods.get_child_count() / float(max_woods)
 
 func _process(delta: float) -> void:
-	if not particles.emitting:
+	burn_rate += delta * .005
+	if not particles.emitting or not player:
 		return
-	for body in warm_bodies:
-		var distance_from_bonfire = global_transform.origin.distance_to(body.get_parent().global_transform.origin)
-		var distance_modifier = 1 - distance_from_bonfire / effective_shape.shape.radius
-		body.temperature += heating_up_rate * delta * max(distance_modifier, minimun_effectiviness)
+	var distance_from_bonfire = global_transform.origin.distance_to(player.global_transform.origin)
+	var distance_modifier = 1 - distance_from_bonfire / effective_shape.shape.radius
+	player.warm_body.temperature += heating_up_rate * delta * max(distance_modifier, minimun_effectiviness)
 
 func _on_CurrentWoodTimer_timeout() -> void:
 	if infinite:
@@ -37,7 +38,10 @@ func _on_CurrentWoodTimer_timeout() -> void:
 		lights.visible = false
 		emit_signal("unlit")
 		return
-	current_wood_timer.wait_time = woods.get_children()[0].burning_time_s
+	var calculated_burn_time = woods.get_children()[0].burning_time_s - woods.get_children()[0].burning_time_s * burn_rate
+	calculated_burn_time = max(calculated_burn_time, 3.5)
+	current_wood_timer.wait_time = calculated_burn_time
+	print(current_wood_timer.wait_time)
 	current_wood_timer.start()
 	woods.remove_child(woods.get_children()[0])
 	if woods.get_child_count() > 0:
@@ -46,20 +50,24 @@ func _on_CurrentWoodTimer_timeout() -> void:
 func add_wood(wood) -> bool:
 	if woods.get_child_count() == max_woods:
 		return false
+	woods.add_child(wood)
 	
 	if not particles.emitting:
 		particles.emitting = true
 		lights.visible = true
+		var calculated_burn_time = woods.get_children()[0].burning_time_s - woods.get_children()[0].burning_time_s * burn_rate
+		calculated_burn_time = max(calculated_burn_time, 3.5)
+		current_wood_timer.wait_time = calculated_burn_time
+		current_wood_timer.start()
 	lights.intensity = woods.get_child_count() / float(max_woods)
-	woods.add_child(wood)
 	return true
 
 func _on_Area_body_entered(body: Node) -> void:
-	if not body.has_node('WarmBody'):
+	if not body is Player:
 		return
-	warm_bodies.append(body.warm_body)
+	player = body
 
 func _on_Area_body_exited(body: Node) -> void:
-	if not body.has_node('WarmBody'):
+	if not body is Player:
 		return
-	warm_bodies.remove(warm_bodies.bsearch(body.warm_body))
+	player = null

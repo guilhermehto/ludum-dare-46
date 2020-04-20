@@ -4,3 +4,4 @@
 
 [node name="Twig" type="Node"]
 script = ExtResource( 1 )
+burning_time_s = 8.0

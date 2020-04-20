@@ -4,5 +4,5 @@
 
 [node name="Info" type="Node"]
 script = ExtResource( 1 )
-burning_time_s = 45.0
+burning_time_s = 15.0
 weight = 2

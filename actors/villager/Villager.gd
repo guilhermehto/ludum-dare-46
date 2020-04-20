@@ -2,7 +2,6 @@ extends KinematicBody
 
 signal died
 
-onready var warm_body = $WarmBody
 onready var animation_player = $AnimationPlayer
 
 export var max_hp : int = 25
@@ -18,7 +17,3 @@ func damage(value: int) -> void:
 	if hp == 0:
 		emit_signal("died")
 		queue_free()
-
-func _on_WarmBody_cold_damaged(damage) -> void:
-	damage(damage)
-	
